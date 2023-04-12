@@ -1,11 +1,15 @@
 import { Document, ObjectId } from 'mongoose';
+import { UserAuthJson, UserJson } from './types';
 
 export interface IUser extends Document {
   name: string;
   username: string;
   password: string;
-  photo: string;
+  photo?: string;
   isActive: boolean;
+  matchPassword: (password: string) => Promise<boolean>;
+  toJSON: () => UserJson;
+  toAuthJSON: () => UserAuthJson;
 }
 
 export interface IChat extends Document {
